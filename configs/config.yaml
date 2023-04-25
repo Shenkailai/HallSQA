@@ -1,0 +1,74 @@
+dataset: "nisqa" # name of the dataset
+datapath: D:\sqa\NISQA_Corpus\NISQA_Corpus # path to the dataset
+output_dir: "./output" # path to the directory where the results will be saved
+pretrained_model: D:\sqa\HallSQA\best_models\bs_4_seed_20_mae_hall_ture_cosine_hardepoch_4.pth # path to the pretrained model
+
+
+# Dataset options
+csv_file: NISQA_corpus_file.csv # csv-file with MOS labels and filepaths of all datasets, must be placed in 'data_dir', must contain columns 'mos', 'noi', 'dis', 'col', 'loud' with overall and dimension quality ratings
+csv_deg: filepath_deg # csv column name of filepath to degraded speech sample, path must be relative to 'data_dir'
+csv_mos_train: mos # csv column name of target training value (usually MOS)
+csv_mos_val: mos # csv column name of target validation value (usually MOS)
+csv_db_train: # dataset names of training sets, the dataset names must be in 'db' column of csv file
+    - NISQA_TRAIN_SIM
+    - NISQA_TRAIN_LIVE
+csv_db_val:  # dataset names of validation sets, the dataset names must be in 'db' column of csv file
+    - NISQA_VAL_SIM
+    - NISQA_VAL_LIVE
+to_memory: false # load the whole dataset to the memory
+to_memory_workers: 0 # number of workers for the dataloader
+comment: "new_loss" # comment for the experiment
+
+# Data augmentation options
+target_length: 1024 # length of the target signal
+mel_bins: 128 # number of mel bins
+skip_norm: false # skip normalization
+norm_mean: -8.459377 # mean for the normalization
+norm_std: 4.301482 # std for the normalization 
+est_norm_mean: -7.496245 # mean for the normalization
+est_norm_std: 3.9172802 # std for the normalization
+
+# Training parameters
+batch_size: 4 # batch size
+num-workers: 0 # number of workers for the dataloader
+n-epochs: 100 # number of epochs
+seed: 20 # seed for the random number generator
+tr_parallel: false # use parallel training
+tr_lr: 1e-5 # learning rate
+tr_wd: 1e-5 # weight decay
+
+# SSAST parameters
+fstride: 16 # stride of the feature map
+tstride: 16 # stride of the temporal dimension
+fshape: 16 # shape of the feature map
+tshape: 16 # shape of the temporal dimension
+load_pretrained_mdl_path: D:\sqa\HallSQA\pre_models\SSAST-Base-Patch-400.pth # path to the pretrained model
+model_size: "base" # size of the model
+
+# Residual Swim transformer parameters
+scale: 0.13 # scale for the residual
+embed_dim: 768 # embedding dimension
+depths: [2, 2, 6, 2]
+window_size: 4
+dim_mlp: 768
+num_heads: [4, 8, 16, 32]
+
+# TAB parameters
+num_tab: 2
+
+
+# SQAloss parameters
+loss_type: "mae" # loss function type
+alpha: [1, 0] # weights for the loss
+beta: [.1, .1, 1] # weights for the loss
+p: 2 # p for the loss
+q: 2 # q for the loss
+monotonicity_regularization: true # use monotonicity regularization
+gamma: 0.1 # gamma for the monotonicity regularization
+detach: false # detach the prediction from the graph
+
+
+# Hallucination parameters
+hallucinate: ture # use hallucination
+att_method: "cosine" # attention method
+apply_att_method: "hard" # apply attention
