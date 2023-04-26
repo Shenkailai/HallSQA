@@ -1,7 +1,7 @@
 dataset: "nisqa" # name of the dataset
 datapath: D:\sqa\NISQA_Corpus\NISQA_Corpus # path to the dataset
 output_dir: "./output" # path to the directory where the results will be saved
-pretrained_model: D:\sqa\HallSQA\best_models\bs_4_seed_20_mae_hall_ture_cosine_hardepoch_4.pth # path to the pretrained model
+pretrained_model:  # path to the pretrained model
 
 
 # Dataset options
@@ -63,7 +63,7 @@ alpha: [1, 0] # weights for the loss
 beta: [.1, .1, 1] # weights for the loss
 p: 2 # p for the loss
 q: 2 # q for the loss
-monotonicity_regularization: true # use monotonicity regularization
+monotonicity_regularization: false # use monotonicity regularization
 gamma: 0.1 # gamma for the monotonicity regularization
 detach: false # detach the prediction from the graph
 

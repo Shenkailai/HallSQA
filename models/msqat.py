@@ -111,7 +111,7 @@ class MSQAT(nn.Module):
         x = rearrange(x, 'b c (h w) -> b c h w', h=self.f_dim,
                       w=self.t_dim)  # 1 768 28 28
         x = self.conv1(x)
-        # x = self.swintransformer1(x)
+        x = self.swintransformer1(x)
 
         x = rearrange(x, 'b c h w -> b (h w) c', h=self.f_dim, w=self.t_dim)
 
