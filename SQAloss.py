@@ -18,16 +18,8 @@ class SQALoss(torch.nn.Module):
         self.detach =  args['detach']
 
     def forward(self, y_pred, y):
-        y = y[0].view(-1, 1)
-        loss = 0
-        if self.beta[-1] > 0:
-            loss += self.beta[-1] * self.loss_func(y_pred[-1], y)
-        if self.beta[0] > 0:
-            loss += self.beta[0] * self.loss_func(y_pred[0], y)
-        if self.beta[1] > 0:
-            loss += self.beta[1] * self.loss_func(y_pred[1], y)
-
-        return loss
+      
+        return self.loss_func(y_pred, y)
 
     def loss_func(self, y_pred, y):
         if self.loss_type == 'mae':

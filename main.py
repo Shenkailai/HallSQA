@@ -96,7 +96,7 @@ if __name__ == "__main__":
     dev = getDevice(args)
     model = models.MSQAT(args=args)
     if args['pretrained_model'] is not None:
-        model.load_state_dict(torch.load(args['pretrained_model']))
+      model = torch.load(args['pretrained_model'])
     if args['tr_parallel']:
         model = nn.DataParallel(model)
     model.to(dev)

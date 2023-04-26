@@ -235,7 +235,7 @@ def train(net, criterion, optimizer, scheduler, train_loader, test_loader, args)
             logging.info('Best weights and model of epoch{}, SRCC:{}, PLCC:{}, RMSE:{}'.format(
                 epoch + 1, best_srocc, best_plcc, besst_rmse))
             
-        torch.save(net, model_path + 'epoch_{}.pth'.format(epoch + 1))
+        torch.save(net, os.path.join(model_path, 'epoch_{}.pth'.format(epoch + 1)))
         logging.info('Epoch {} done. Time: {:.2}min'.format(epoch + 1, (time.time() - start_time) / 60))
         
         
